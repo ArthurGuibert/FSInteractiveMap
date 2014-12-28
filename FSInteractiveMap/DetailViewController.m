@@ -86,11 +86,13 @@
 {
     NSDictionary* data = @{@"fr" : @12,
                            @"it" : @2,
-                           @"de" : @3
+                           @"de" : @9,
+                           @"pl" : @24,
+                           @"uk" : @17
                            };
     
     FSInteractiveMapView* map = [[FSInteractiveMapView alloc] initWithFrame:CGRectMake(-1, 64, self.view.frame.size.width + 2, 500)];
-    [map loadMap:@"europe" withData:data colorAxis:@[[UIColor whiteColor], [UIColor redColor]]];
+    [map loadMap:@"europe" withData:data colorAxis:@[[UIColor blueColor], [UIColor greenColor], [UIColor yellowColor], [UIColor redColor]]];
     
     [self.view addSubview:map];
 }
