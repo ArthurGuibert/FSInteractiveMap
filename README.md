@@ -17,10 +17,10 @@ Add the contents of the FSInteractiveMap project to your directory or simply add
 
     pod "FSInteractiveMap"
 
-    
+
 How to use
 ---
-FSInteractiveMap is a subclass of UIView so it can be added as regular view. It's basically loading a map from a SVG file. There are a few by default but you can add any SVG you like.
+FSInteractiveMap is a subclass of UIView so it can be added as regular view. It's basically loading a map from a SVG file. I bundled a few svg maps in the example but you can add any SVG to your project and load it.
 
 ```objc
 NSDictionary* data = @{	@"asia" : @12,
