@@ -5,6 +5,8 @@ A charting library to visualize data on a map. It's like <a href="https://develo
 
 The idea behind this library is to load a SVG file of a map and display it simply in a view. On top of that you can know when a specific area is clicked.
 
+Please note that the SVG loading is quite simple and doesn't support all the features of the SVG file format. It's just good enough to display most of the maps I found in SVG!
+
 Screenshots
 ---
 <img src="Screenshots/screen00.png" width="320px" />&nbsp;<img src="Screenshots/screen01.png" width="320px" />&nbsp;<img src="Screenshots/screen02.png" width="320px" />
@@ -56,7 +58,7 @@ FSInteractiveMapView* map = [[FSInteractiveMapView alloc] initWithFrame:CGRectMa
 
 How to find SVG maps
 ---
-There are a few places where you can find svg files that are suitable with FSInteractiveMap. Here is a short list:
+There are a few places where you can find svg files that are suitable for FSInteractiveMap. Here is a short list:
 - http://www.amcharts.com/svg-maps/
 - http://www.highcharts.com/maps/demo#custom/world-continents
 - Wikipedia
