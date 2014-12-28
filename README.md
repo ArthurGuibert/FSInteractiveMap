@@ -11,6 +11,13 @@ Screenshots
 ---
 <img src="Screenshots/screen00.png" width="320px" />&nbsp;<img src="Screenshots/screen01.png" width="320px" />&nbsp;<img src="Screenshots/screen02.png" width="320px" />
 
+Installing FSInteractiveMap
+---
+Add the contents of the FSInteractiveMap project to your directory or simply add the following line to your Podfile:
+
+    pod "FSInteractiveMap"
+
+    
 How to use
 ---
 FSInteractiveMap is a subclass of UIView so it can be added as regular view. It's basically loading a map from a SVG file. There are a few by default but you can add any SVG you like.
