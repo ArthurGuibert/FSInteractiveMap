@@ -69,3 +69,8 @@ There are a few places where you can find svg files that are suitable for FSInte
 - http://www.amcharts.com/svg-maps/
 - http://www.highcharts.com/maps/demo#custom/world-continents
 - Wikipedia
+
+Contact & Issues
+---
+If you have any issues please let me know in the issue part of this project.
+For any other things you can reach me on <a href="https://twitter.com/birslip">twitter</a> or by <a href="mailto:birslip@gmail.com">email</a>.
