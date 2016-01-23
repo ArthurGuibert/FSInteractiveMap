@@ -143,7 +143,7 @@
         FSSVGPathElement* element = _svg.paths[i];
         
         if([self.layer.sublayers[i] isKindOfClass:CAShapeLayer.class] && element.fill) {
-            CAShapeLayer* l = self.layer.sublayers[i];
+            CAShapeLayer* l = (CAShapeLayer*)self.layer.sublayers[i];
             
             if(element.fill) {
                 if(colorsDict && [colorsDict objectForKey:element.identifier]) {
@@ -172,7 +172,7 @@
         FSSVGPathElement* element = _svg.paths[i];
         
         if([self.layer.sublayers[i] isKindOfClass:CAShapeLayer.class] && element.fill) {
-            CAShapeLayer* l = self.layer.sublayers[i];
+            CAShapeLayer* l = (CAShapeLayer*)self.layer.sublayers[i];
             block(element.identifier, l);
         }
     }
@@ -192,7 +192,7 @@
             FSSVGPathElement* element = _svg.paths[i];
             
             if([self.layer.sublayers[i] isKindOfClass:CAShapeLayer.class] && element.fill) {
-                CAShapeLayer* l = self.layer.sublayers[i];
+                CAShapeLayer* l = (CAShapeLayer*)self.layer.sublayers[i];
                 
                 if(_clickHandler) {
                     _clickHandler(element.identifier, l);
