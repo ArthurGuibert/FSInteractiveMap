@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E302F891C53EA81009A368A /* FSSVGParsingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E302F881C53EA81009A368A /* FSSVGParsingTests.m */; };
 		8ED756AE1A5095A80073A6A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED756AD1A5095A80073A6A2 /* main.m */; };
 		8ED756B11A5095A80073A6A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED756B01A5095A80073A6A2 /* AppDelegate.m */; };
 		8ED756B41A5095A80073A6A2 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED756B31A5095A80073A6A2 /* MasterViewController.m */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E302F881C53EA81009A368A /* FSSVGParsingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSVGParsingTests.m; sourceTree = "<group>"; };
 		8ED756A81A5095A80073A6A2 /* FSInteractiveMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSInteractiveMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED756AC1A5095A80073A6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED756AD1A5095A80073A6A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		8ED756C71A5095A80073A6A2 /* FSInteractiveMapTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E302F881C53EA81009A368A /* FSSVGParsingTests.m */,
 				8ED756CA1A5095A80073A6A2 /* FSInteractiveMapTests.m */,
 				8ED756C81A5095A80073A6A2 /* Supporting Files */,
 			);
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E302F891C53EA81009A368A /* FSSVGParsingTests.m in Sources */,
 				8ED756CB1A5095A80073A6A2 /* FSInteractiveMapTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
