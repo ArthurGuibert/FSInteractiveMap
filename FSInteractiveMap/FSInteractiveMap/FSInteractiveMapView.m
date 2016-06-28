@@ -30,6 +30,13 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _scaledPaths = [NSMutableArray array];
+    [self setDefaultParameters];
+}
+
 - (void)setDefaultParameters
 {
     self.fillColor = [UIColor colorWithWhite:0.85 alpha:1];
