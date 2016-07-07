@@ -111,8 +111,8 @@
     
     for (id key in data) {
         NSNumber* value = [data objectForKey:key];
-        float s = ([value floatValue] - min) / (max - min);
-        float segmentLength = 1.0 / ([colors count] - 1);
+        float s = ([value floatValue] - min) / ( ((max-min) == 0 ? 1 : (max-min)) );
+        float segmentLength = 1.0 / ( (([colors count] - 1) == 0 ? 1 : ([colors count] - 1)) );
         int minColorIndex = MAX(floorf(s / segmentLength),0);
         int maxColorIndex = MIN(ceilf(s / segmentLength), [colors count] - 1);
         
