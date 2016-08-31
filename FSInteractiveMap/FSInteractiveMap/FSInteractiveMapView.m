@@ -45,6 +45,47 @@
 
 #pragma mark - SVG map loading
 
+- (void)loadMap:(NSString*)mapName forSize:(CGSize)size withColors:(NSDictionary*)colorsDict {
+    _svg = [FSSVG svgWithFile:mapName];
+    
+    for (FSSVGPathElement* path in _svg.paths) {
+        // Make the map fits inside the frame
+        float scaleHorizontal = size.width / _svg.bounds.size.width;
+        float scaleVertical = size.height / _svg.bounds.size.height;
+        float scale = MIN(scaleHorizontal, scaleVertical);
+        
+        CGAffineTransform scaleTransform = CGAffineTransformIdentity;
+        scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        scaleTransform = CGAffineTransformTranslate(scaleTransform, size.width/2, -_svg.bounds.origin.y);
+        
+        UIBezierPath* scaled = [path.path copy];
+        [scaled applyTransform:scaleTransform];
+        
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = scaled.CGPath;
+        
+        // Setting CAShapeLayer properties
+        shapeLayer.strokeColor = self.strokeColor.CGColor;
+        shapeLayer.lineWidth = 0.5;
+        
+        if(path.fill) {
+            if(colorsDict && [colorsDict objectForKey:path.identifier]) {
+                UIColor* color = [colorsDict objectForKey:path.identifier];
+                shapeLayer.fillColor = color.CGColor;
+            } else {
+                shapeLayer.fillColor = self.fillColor.CGColor;
+            }
+            
+        } else {
+            shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+        }
+        
+        [self.layer addSublayer:shapeLayer];
+        
+        [_scaledPaths addObject:scaled];
+    }
+}
+
 - (void)loadMap:(NSString*)mapName withColors:(NSDictionary*)colorsDict
 {
     _svg = [FSSVG svgWithFile:mapName];

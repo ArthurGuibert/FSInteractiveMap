@@ -18,6 +18,7 @@
 @property (nonatomic, copy) void (^clickHandler)(NSString* identifier, CAShapeLayer* layer);
 
 // Loading functions
+- (void)loadMap:(NSString*)mapName forSize:(CGSize)size withColors:(NSDictionary*)colorsDict;
 - (void)loadMap:(NSString*)mapName withColors:(NSDictionary*)colorsDict;
 - (void)loadMap:(NSString*)mapName withData:(NSDictionary*)data colorAxis:(NSArray*)colors;
 
