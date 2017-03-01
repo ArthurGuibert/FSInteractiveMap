@@ -132,6 +132,11 @@
 {
     [self loadMap:mapName withColors:[self getColorsForData:data colorAxis:colors]];
 }
+    
+- (void)loadMap:(NSString*)mapName forSize:(CGSize)size withData:(NSDictionary*)data colorAxis:(NSArray*)colors
+{
+    [self loadMap:mapName forSize:size withColors:[self getColorsForData:data colorAxis:colors]];
+}
 
 - (NSDictionary*)getColorsForData:(NSDictionary*)data colorAxis:(NSArray*)colors
 {
@@ -210,6 +215,11 @@
 - (void)setData:(NSDictionary*)data colorAxis:(NSArray*)colors
 {
     [self setColors:[self getColorsForData:data colorAxis:colors]];
+}
+    
+- (void)clearAll
+{
+    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
 }
 
 #pragma mark - Layers enumeration
