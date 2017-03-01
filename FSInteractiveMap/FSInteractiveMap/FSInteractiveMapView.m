@@ -30,6 +30,13 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _scaledPaths = [NSMutableArray array];
+    [self setDefaultParameters];
+}
+
 - (void)setDefaultParameters
 {
     self.fillColor = [UIColor colorWithWhite:0.85 alpha:1];
@@ -37,6 +44,47 @@
 }
 
 #pragma mark - SVG map loading
+
+- (void)loadMap:(NSString*)mapName forSize:(CGSize)size withColors:(NSDictionary*)colorsDict {
+    _svg = [FSSVG svgWithFile:mapName];
+    
+    for (FSSVGPathElement* path in _svg.paths) {
+        // Make the map fits inside the frame
+        float scaleHorizontal = size.width / _svg.bounds.size.width;
+        float scaleVertical = size.height / _svg.bounds.size.height;
+        float scale = MIN(scaleHorizontal, scaleVertical);
+        
+        CGAffineTransform scaleTransform = CGAffineTransformIdentity;
+        scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        scaleTransform = CGAffineTransformTranslate(scaleTransform, size.width/2, -_svg.bounds.origin.y);
+        
+        UIBezierPath* scaled = [path.path copy];
+        [scaled applyTransform:scaleTransform];
+        
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = scaled.CGPath;
+        
+        // Setting CAShapeLayer properties
+        shapeLayer.strokeColor = self.strokeColor.CGColor;
+        shapeLayer.lineWidth = 0.5;
+        
+        if(path.fill) {
+            if(colorsDict && [colorsDict objectForKey:path.identifier]) {
+                UIColor* color = [colorsDict objectForKey:path.identifier];
+                shapeLayer.fillColor = color.CGColor;
+            } else {
+                shapeLayer.fillColor = self.fillColor.CGColor;
+            }
+            
+        } else {
+            shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+        }
+        
+        [self.layer addSublayer:shapeLayer];
+        
+        [_scaledPaths addObject:scaled];
+    }
+}
 
 - (void)loadMap:(NSString*)mapName withColors:(NSDictionary*)colorsDict
 {
@@ -50,7 +98,7 @@
         
         CGAffineTransform scaleTransform = CGAffineTransformIdentity;
         scaleTransform = CGAffineTransformMakeScale(scale, scale);
-        scaleTransform = CGAffineTransformTranslate(scaleTransform,-_svg.bounds.origin.x, -_svg.bounds.origin.y);
+        scaleTransform = CGAffineTransformTranslate(scaleTransform, -_svg.bounds.origin.y, -_svg.bounds.origin.y);
         
         UIBezierPath* scaled = [path.path copy];
         [scaled applyTransform:scaleTransform];
@@ -84,6 +132,11 @@
 {
     [self loadMap:mapName withColors:[self getColorsForData:data colorAxis:colors]];
 }
+    
+- (void)loadMap:(NSString*)mapName forSize:(CGSize)size withData:(NSDictionary*)data colorAxis:(NSArray*)colors
+{
+    [self loadMap:mapName forSize:size withColors:[self getColorsForData:data colorAxis:colors]];
+}
 
 - (NSDictionary*)getColorsForData:(NSDictionary*)data colorAxis:(NSArray*)colors
 {
@@ -104,8 +157,8 @@
     
     for (id key in data) {
         NSNumber* value = [data objectForKey:key];
-        float s = ([value floatValue] - min) / (max - min);
-        float segmentLength = 1.0 / ([colors count] - 1);
+        float s = ([value floatValue] - min) / ( ((max-min) == 0 ? 1 : (max-min)) );
+        float segmentLength = 1.0 / ( (([colors count] - 1) == 0 ? 1 : ([colors count] - 1)) );
         int minColorIndex = MAX(floorf(s / segmentLength),0);
         int maxColorIndex = MIN(ceilf(s / segmentLength), [colors count] - 1);
         
@@ -162,6 +215,11 @@
 - (void)setData:(NSDictionary*)data colorAxis:(NSArray*)colors
 {
     [self setColors:[self getColorsForData:data colorAxis:colors]];
+}
+    
+- (void)clearAll
+{
+    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
 }
 
 #pragma mark - Layers enumeration
