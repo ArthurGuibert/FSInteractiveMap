@@ -30,6 +30,17 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder*)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self) {
+        _scaledPaths = [NSMutableArray array];
+        [self setDefaultParameters];
+    }
+
+    return self;
+}
+
 - (void)setDefaultParameters
 {
     self.fillColor = [UIColor colorWithWhite:0.85 alpha:1];
